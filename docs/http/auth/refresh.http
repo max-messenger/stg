@@ -1,0 +1,7 @@
+@host = 0.0.0.0:8080
+POST {{host}}/v1/auth/refresh
+Cookie: refresh_token=<refresh_token_from_cookie>
+
+### Ответ: { "data": { "expires_in": 900 } }
+### Новый access-токен: Set-Cookie: access_token=...; HttpOnly; Path=/; SameSite=Lax (rotation)
+### Новый refresh-токен: Set-Cookie: refresh_token=...; HttpOnly; Path=/v1/auth; SameSite=Lax (rotation)

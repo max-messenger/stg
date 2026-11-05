@@ -1,0 +1,6 @@
+POST {{host}}/v1/todos/create
+Content-Type: application/json
+
+{
+  "message": "new record"
+}

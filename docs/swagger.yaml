@@ -1,0 +1,507 @@
+basePath: /
+definitions:
+  authctrl.authResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  authctrl.tokenRequest:
+    properties:
+      init_data:
+        type: string
+    type: object
+  filectrl.UploadResponse:
+    properties:
+      key:
+        type: string
+    type: object
+  stg_internal_app_domain.Todo:
+    properties:
+      created:
+        type: string
+      done:
+        type: boolean
+      id:
+        format: int64
+        type: integer
+      message:
+        type: string
+      userID:
+        format: int64
+        type: integer
+    type: object
+  todolistctrl.CreateRequest:
+    properties:
+      message:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  todolistctrl.CreateResponse:
+    properties:
+      id:
+        type: integer
+    type: object
+  todolistctrl.DeleteRequest:
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  todolistctrl.EditRequest:
+    properties:
+      id:
+        type: integer
+      message:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  todolistctrl.EditResponse:
+    properties:
+      id:
+        type: integer
+    type: object
+  todolistctrl.ListResponse:
+    properties:
+      todos:
+        items:
+          $ref: '#/definitions/stg_internal_app_domain.Todo'
+        type: array
+    type: object
+  todolistctrl.ToggleRequest:
+    properties:
+      done:
+        type: boolean
+      id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a stg API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: STG API
+  version: "1.0"
+paths:
+  /v1/auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: invalidate refresh token and clear auth
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: logout
+      tags:
+      - auth
+  /v1/auth/me:
+    get:
+      consumes:
+      - application/json
+      description: return user data from access_token
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/authctrl.authResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      summary: get current user
+      tags:
+      - auth
+  /v1/auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: rotate access/refresh token pair using refresh_token
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/authctrl.authResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: refresh tokens
+      tags:
+      - auth
+  /v1/auth/token:
+    post:
+      consumes:
+      - application/json
+      description: validate MAX init_data and issue access/refresh token pair
+      parameters:
+      - description: request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/authctrl.tokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/authctrl.authResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: authenticate user
+      tags:
+      - auth
+  /v1/files/:
+    post:
+      consumes:
+      - multipart/form-data
+      description: upload a file via multipart form and return its key
+      parameters:
+      - description: file to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/filectrl.UploadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: upload file
+      tags:
+      - files
+  /v1/files/{key}:
+    delete:
+      description: delete a file by its key
+      parameters:
+      - description: file key
+        in: path
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: delete file
+      tags:
+      - files
+    get:
+      description: download a file by its key
+      parameters:
+      - description: file key
+        in: path
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: download file
+      tags:
+      - files
+  /v1/todos/create:
+    post:
+      consumes:
+      - application/json
+      description: create new todo record
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: request body
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/todolistctrl.CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/todolistctrl.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "403":
+          description: Forbidden
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: add todo
+      tags:
+      - todo
+  /v1/todos/delete:
+    post:
+      consumes:
+      - application/json
+      description: delete by id
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: request body
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/todolistctrl.DeleteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            format: int64
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "403":
+          description: Forbidden
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: delete todo
+      tags:
+      - todo
+  /v1/todos/edit:
+    put:
+      consumes:
+      - application/json
+      description: update todo message
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: request body
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/todolistctrl.EditRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/todolistctrl.EditResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "403":
+          description: Forbidden
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: edit todo
+      tags:
+      - todo
+  /v1/todos/list:
+    post:
+      consumes:
+      - application/json
+      description: get all todo records
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/todolistctrl.ListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "403":
+          description: Forbidden
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: get todo list
+      tags:
+      - todo
+  /v1/todos/toggle:
+    post:
+      consumes:
+      - application/json
+      description: toggle todo done status
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: request body
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/todolistctrl.ToggleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            format: int64
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "403":
+          description: Forbidden
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: toggle todo
+      tags:
+      - todo
+swagger: "2.0"

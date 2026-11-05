@@ -1,0 +1,6 @@
+@host = 0.0.0.0:8080
+POST {{host}}/v1/auth/logout
+Cookie: refresh_token=<refresh_token_from_cookie>
+
+### Ответ: { "data": null }
+### Куки access_token и refresh_token очищаются (Set-Cookie: MaxAge=-1)

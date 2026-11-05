@@ -1,0 +1,6 @@
+@host = 0.0.0.0:8080
+GET {{host}}/v1/auth/me
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzkxODYxNjYsImlhdCI6MTc3OTE4NTI2NiwidXNlcl9pZCI6MTIzNDUsImNoYXRfaWQiOjY3ODkwfQ.k86Obdm45c9GGoOjnqiqyauywkR2WuQCqMnSmpeN5Y4
+
+### Ответ: { "data": { "user_id": 12345, "chat_id": 67890 } }
+### Возвращает 401 если access-токен истёк или отсутствует

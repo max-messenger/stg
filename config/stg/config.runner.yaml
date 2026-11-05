@@ -1,0 +1,78 @@
+logger:
+  level: ${INTEGRATION_LOG_LEVEL:"debug"}
+  format: json
+
+servers:
+  http:
+    addr: ${INTEGRATION_HTTP_ADDR:":18080"}
+  system:
+    addr: ${INTEGRATION_SYSTEM_ADDR:":23570"}
+
+max_bot:
+  test_api_url: ${INTEGRATION_STUB_ADDR:"http://localhost:19090"}
+  token: test-token
+  url: ${INTEGRATION_MAXBOT_WEBHOOK_URL:"http://localhost:18080"}
+  path: /webhook
+  secret: test-secret
+  subscription_type: webhook
+  types: # в рамках одной подписки не больше 14 шт.
+    - message_created
+    - message_callback
+    - message_edited
+    - message_removed
+    - bot_added
+    - bot_removed
+    - user_added
+    - bot_started
+    - bot_stopped
+
+auth:
+  jwt_secret: ${JWT_SECRET:"dev-secret"}
+  access_ttl: ${ACCESS_TTL:"15m"}
+  refresh_ttl: ${REFRESH_TTL:"720h"}
+  max_token: ${MAXBOT_TOKEN:test-token}
+
+cors:
+  allowed_origins: ${CORS_ALLOWED_ORIGINS:[]}
+
+redis:
+  main:
+    key_prefix: stg-integration
+    addrs:
+      - ${INTEGRATION_REDIS_ADDR:"localhost:6379"}
+    route_by_latency: true
+    route_randomly: false
+    pool_timeout: 3s
+    connect_timeout: 1s
+    max_retries: 3
+    min_retry_backoff: 8ms
+    max_retry_backoff: 512ms
+    dial_timeout: 5s
+    read_timeout: 2s
+    write_timeout: 2s
+
+locker:
+  pool_name: main
+
+postgres:
+  stg-sel:
+    database_url: ${INTEGRATION_POSTGRES_DSN:"postgres://postgres:postgres@localhost:5432/stg?sslmode=disable"}
+  stg-upd:
+    database_url: ${INTEGRATION_POSTGRES_DSN:"postgres://postgres:postgres@localhost:5432/stg?sslmode=disable"}
+
+migrate:
+  pool_name: stg-upd
+
+telemetry:
+  collector:
+    enabled: false
+
+minio:
+  endpoint: ${INTEGRATION_S3_ENDPOINT:"localhost:9000"}
+  access_key: ${INTEGRATION_S3_ACCESS_KEY:"minioadmin"}
+  secret_key: ${INTEGRATION_S3_SECRET_KEY:"minioadmin"}
+  use_ssl: false
+
+s3:
+  bucket: stg-local
+

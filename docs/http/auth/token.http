@@ -1,0 +1,15 @@
+@host = 0.0.0.0:8080
+#@host = 0.0.0.0:8080
+POST {{host}}/v1/auth/token
+Content-Type: application/json
+
+{
+  "init_data": "query_id=AAHdF3e7&user={\"id\":12345,\"first_name\":\"Max\",\"last_name\":\"User\",\"username\":\"maxuser\",\"language_code\":\"ru\"}&chat={\"id\":67890,\"type\":\"DIALOG\"}&auth_date=1779278185&start_param=promo&hash=f85cf9d0b1dfb719975db076e27f861830f5e63b676f32539f044dfbd4a5ddd7"
+}
+
+### Ответ: { "data": { "user": ..., "chat": ..., "expires_in": 900 } }
+### Access-токен: Set-Cookie: access_token=...; HttpOnly; Path=/; SameSite=Lax
+### Refresh-токен: Set-Cookie: refresh_token=...; HttpOnly; Path=/v1/auth; SameSite=Lax
+
+### Для генерации свежего init_data (auth_date истекает через 1 час):
+### go run docs/http/auth/gen_init_data.go
