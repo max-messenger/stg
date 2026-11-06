@@ -22,7 +22,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.1.1
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.4
 	github.com/guregu/null/v6 v6.0.0
-	github.com/huandu/go-sqlbuilder v1.44.0
+	github.com/huandu/go-sqlbuilder v1.44.1
 	github.com/jackc/pgx/v5 v5.11.0
 	github.com/karlseguin/ccache/v3 v3.0.8
 	github.com/max-messenger/max-bot-api-client-go/v2 v2.4.7
