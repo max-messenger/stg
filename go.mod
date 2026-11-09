@@ -25,7 +25,7 @@ require (
 	github.com/huandu/go-sqlbuilder v1.44.1
 	github.com/jackc/pgx/v5 v5.11.0
 	github.com/karlseguin/ccache/v3 v3.0.8
-	github.com/max-messenger/max-bot-api-client-go/v2 v2.4.7
+	github.com/max-messenger/max-bot-api-client-go/v2 v2.4.10
 	github.com/minio/minio-go/v7 v7.3.0
 	github.com/prometheus/client_golang v1.24.1
 	github.com/redis/go-redis/v9 v9.23.0
