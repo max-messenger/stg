@@ -4,8 +4,8 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
-	"stg/internal/app/router"
 	"stg/internal/app/services/auth"
+	"stg/pkg/server"
 )
 
 const name = "authctrl"
@@ -44,7 +44,7 @@ func Adapter(in AdapterIn) AdapterOut {
 type ControllerOut struct {
 	fx.Out
 
-	Controller router.Controller `group:"controller"`
+	Controller server.Controller `group:"controller"`
 }
 
 func AdapterControllerOut(ctrl *Controller) ControllerOut {

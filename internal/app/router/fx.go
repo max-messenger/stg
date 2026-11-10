@@ -6,6 +6,7 @@ import (
 	"go.uber.org/zap"
 
 	"stg/pkg/http/middlewares"
+	"stg/pkg/server"
 )
 
 const moduleName = "httpsrv"
@@ -39,7 +40,7 @@ type (
 	ControllersIn struct {
 		fx.In
 
-		Controllers []Controller `group:"controller"`
+		Controllers []server.Controller `group:"controller"`
 	}
 
 	ControllersOut struct {

@@ -9,17 +9,13 @@ import (
 
 	"stg/internal/app/services/auth"
 	"stg/pkg/http/middlewares"
+	"stg/pkg/server"
 )
-
-// Controller api controller.
-type Controller interface {
-	Register(r chi.Router)
-}
 
 // AuthMiddleware проверяет access_token куку и кладёт userID в контекст.
 type AuthMiddleware func(http.Handler) http.Handler
 
-type Controllers []Controller
+type Controllers []server.Controller
 
 // 	@title          STG API
 // 	@version        1.0

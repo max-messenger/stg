@@ -34,6 +34,7 @@ type MessageBody struct {
 	Seq         int64        `json:"seq"`
 	Text        string       `json:"text"`
 	Attachments []Attachment `json:"attachments"`
+	MarkUp      []Markup     `json:"markup"`
 }
 
 type MessageList struct {
@@ -71,4 +72,13 @@ type PinMessageBody struct {
 
 type GetPinnedMessageResult struct {
 	Message Message `json:"message"`
+}
+
+type Markup struct {
+	Type     string `json:"type"`
+	From     int32  `json:"from"`
+	Length   int32  `json:"length"`
+	URL      string `json:"url"`
+	UserLink string `json:"user_link"`
+	UserID   int64  `json:"user_id"`
 }

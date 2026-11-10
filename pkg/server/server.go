@@ -3,8 +3,14 @@ package server
 import (
 	"context"
 
+	"github.com/go-chi/chi/v5"
 	"go.uber.org/fx"
 )
+
+// Controller api controller.
+type Controller interface {
+	Register(r chi.Router)
+}
 
 type Server interface {
 	Start(ctx context.Context) error

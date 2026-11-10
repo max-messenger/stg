@@ -4,7 +4,7 @@ import (
 	"go.uber.org/fx"
 
 	"stg/internal/app/clients/maxbot"
-	"stg/internal/app/router"
+	"stg/pkg/server"
 )
 
 const name = "webhookctrl"
@@ -39,7 +39,7 @@ func Adapter(in AdapterIn) AdapterOut {
 type ControllerOut struct {
 	fx.Out
 
-	Controller router.Controller `group:"controller"`
+	Controller server.Controller `group:"controller"`
 }
 
 func AdapterControllerOut(ctrl *Controller) ControllerOut {
