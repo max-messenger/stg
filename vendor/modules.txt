@@ -137,7 +137,7 @@ github.com/elastic/go-elasticsearch/v7
 github.com/elastic/go-elasticsearch/v7/esapi
 github.com/elastic/go-elasticsearch/v7/estransport
 github.com/elastic/go-elasticsearch/v7/internal/version
-# github.com/exaring/otelpgx v0.12.1
+# github.com/exaring/otelpgx v0.13.0
 ## explicit; go 1.25.0
 github.com/exaring/otelpgx
 # github.com/fatih/color v1.19.0

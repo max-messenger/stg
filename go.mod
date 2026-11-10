@@ -14,7 +14,7 @@ require (
 	github.com/FluorescentTouch/testosteron/v2 v2.0.11
 	github.com/cenkalti/backoff/v4 v4.3.0
 	github.com/chapsuk/wait v0.3.2
-	github.com/exaring/otelpgx v0.12.1
+	github.com/exaring/otelpgx v0.13.0
 	github.com/go-chi/chi/v5 v5.3.2
 	github.com/goccy/go-json v0.11.2
 	github.com/golang-jwt/jwt/v5 v5.3.1
