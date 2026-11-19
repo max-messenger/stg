@@ -418,8 +418,8 @@ github.com/mattn/go-runewidth
 # github.com/mattn/go-sqlite3 v1.14.22
 ## explicit; go 1.19
 github.com/mattn/go-sqlite3
-# github.com/max-messenger/max-bot-api-client-go/v2 v2.4.10
-## explicit; go 1.24.0
+# github.com/max-messenger/max-bot-api-client-go/v2 v2.5.0
+## explicit; go 1.27
 github.com/max-messenger/max-bot-api-client-go/v2
 github.com/max-messenger/max-bot-api-client-go/v2/model
 # github.com/max-messenger/maxbot v1.4.7
@@ -861,7 +861,7 @@ go.uber.org/zap/internal/stacktrace
 go.uber.org/zap/internal/ztest
 go.uber.org/zap/zapcore
 go.uber.org/zap/zaptest
-# go.yaml.in/yaml/v3 v3.0.5
+# go.yaml.in/yaml/v3 v3.0.6
 ## explicit; go 1.16
 go.yaml.in/yaml/v3
 # golang.org/x/crypto v0.57.0
