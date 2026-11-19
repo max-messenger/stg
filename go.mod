@@ -28,7 +28,7 @@ require (
 	github.com/max-messenger/max-bot-api-client-go/v2 v2.4.10
 	github.com/max-messenger/maxbot v1.4.7
 	github.com/minio/minio-go/v7 v7.4.1
-	github.com/prometheus/client_golang v1.24.1
+	github.com/prometheus/client_golang v1.25.0
 	github.com/redis/go-redis/v9 v9.23.0
 	github.com/rubenv/sql-migrate v1.8.1
 	github.com/stretchr/testify v1.12.1
@@ -164,9 +164,9 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.33 // indirect
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
-	github.com/prometheus/client_model v0.6.2 // indirect
-	github.com/prometheus/common v0.70.1 // indirect
-	github.com/prometheus/procfs v0.21.1 // indirect
+	github.com/prometheus/client_model v0.6.3 // indirect
+	github.com/prometheus/common v0.72.0 // indirect
+	github.com/prometheus/procfs v0.22.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20250401214520-65e299d6c5c9 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/russross/blackfriday/v2 v2.0.1 // indirect
